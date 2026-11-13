@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>PikaWebs · Web Designing & Marketing Workspace</title>
+
+  <!-- PikaWebs Favicon -->
+  <link rel="icon" type="image/png" href="Pikawebs Gradient Tech Logo.png">
+  <link rel="apple-touch-icon" href="Pikawebs Gradient Tech Logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #f5f5f7;
+      --bg-surface: #ffffff;
+      --border-hairline: rgba(0, 0, 0, 0.08);
+      --border-input: #d2d2d7;
+      --text-primary: #1d1d1f;
+      --text-secondary: #515154;
+      --text-muted: #86868b;
+      --apple-blue: #0071e3;
+      --apple-blue-hover: #0077ed;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: #ffffff;
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Apple-style Translucent Top Nav */
+    .top-nav {
+      height: 64px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-hairline);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav-logo {
+      height: 34px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-badge {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-canvas);
+      padding: 6px 14px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .nav-badge i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34c759;
+    }
+
+    /* Main Split Landing Container */
+    .landing-grid {
+      flex: 1;
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 32px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    /* Left Hero Column */
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-logo-box {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 22px;
+      background: var(--bg-canvas);
+      border-radius: 18px;
+      width: fit-content;
+      overflow: hidden;
+    }
+
+    .hero-logo-box img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .hero-kicker {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--apple-blue);
+    }
+
+    .hero-side h1 {
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(34px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      color: var(--text-primary);
+    }
+
+    .hero-side p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 500px;
+    }
+
+    .service-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .service-pills span {
+      padding: 8px 15px;
+      border-radius: 999px;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border-hairline);
+    }
+
+    /* Right Auth Card */
+    .auth-card {
+      width: 100%;
+      max-width: 430px;
+      justify-self: end;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 24px;
+      padding: 34px 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.08);
+      animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Gemini / Workspace Gradient Loader Bar inside Auth Card */
+    .workspace-loader {
+      width: 100%;
+      height: 3px;
+      background: #f1f5f9;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .workspace-loader-bar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 45%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #2563eb, #7c3aed);
+      animation: workspaceSlide 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+
+    @keyframes workspaceSlide {
+      0% { left: -45%; }
+      100% { left: 105%; }
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-canvas);
+      padding: 3px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+    }
+
+    .tab-btn {
+      padding: 8px;
+      border: none;
+      border-radius: 9px;
+      background: transparent;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: var(--text-primary);
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .auth-card h2 {
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .auth-form {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .auth-form.active {
+      display: flex;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 11px;
+      border: 1px solid var(--border-input);
+      background: #ffffff;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 13.5px;
+      outline: none;
+      transition: all 0.16s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+    }
+
+    .password-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-wrap input {
+      padding-right: 42px;
+    }
+
+    .toggle-pwd {
+      position: absolute;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+    }
+
+    .toggle-pwd:hover {
+      color: var(--text-primary);
+    }
+
+    .submit-btn {
+      margin-top: 6px;
+      padding: 12px;
+      border: none;
+      border-radius: 999px;
+      background: var(--apple-blue);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.16s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--apple-blue-hover);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .status-msg {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      display: none;
+    }
+
+    .status-msg.error {
+      display: block;
+      background: rgba(255, 59, 48, 0.1);
+      color: #d70015;
+    }
+
+    .status-msg.success {
+      display: block;
+      background: rgba(52, 199, 89, 0.12);
+      color: #248a3d;
+    }
+
+    .helper-note {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-hairline);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .landing-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 28px 20px;
+      }
+      .auth-card {
+        justify-self: stretch;
+        max-width: 100%;
+      }
+      .top-nav {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-nav">
+    <img src="Pikawebs Gradient Tech Logo.png" alt="PikaWebs" class="nav-logo" onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<strong style=\'font-size:18px;font-weight:800;color:#0071e3;\'>PikaWebs</strong>');">
+    <div class="nav-badge"><i></i>Internal Team Portal</div>
+  </header>
+
+  <main class="landing-grid">
+    <!-- Left Apple-Style Brand Landing Section -->
+    <section class="hero-side">
+      <div class="hero-logo-box">
+        <img src="Pikawebs Gradient Tech Logo.png" alt="PikaWebs Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<strong style=\'font-size:22px;font-weight:800;color:#0071e3;\'>PikaWebs</strong>';">
+      </div>
+      <p class="hero-kicker">PIKAWEBS INTERNAL OPERATIONS</p>
+      <h1>Web Designing & Marketing, unified in one workspace.</h1>
+      <p>Manage PikaWebs client accounts, Web Services, SEO campaigns, SMM retainers, and instant GST/INR invoices—live synced across your team.</p>
+      <div class="service-pills">
+        <span>⚡ Web Services</span>
+        <span>📈 SEO & Lead Generation</span>
+        <span>📱 Meta & Social Marketing</span>
+        <span>🧾 Instant Billing</span>
+      </div>
+    </section>
+
+    <!-- Right Employee Sign In / Register Card -->
+    <section class="auth-card">
+      <div class="workspace-loader" aria-hidden="true">
+        <div class="workspace-loader-bar"></div>
+      </div>
+
+      <div class="tabs">
+        <button type="button" class="tab-btn active" data-tab="loginForm">Sign In</button>
+        <button type="button" class="tab-btn" data-tab="registerForm">Register</button>
+      </div>
+
+      <form id="loginForm" class="auth-form active">
+        <div>
+          <h2>Sign in to PikaWebs</h2>
+          <p class="subtitle">Enter your team credentials to open the workspace.</p>
+        </div>
+
+        <label class="field">WORK EMAIL
+          <input type="email" name="email" required placeholder="name@pikawebs.com">
+        </label>
+
+        <label class="field">PASSWORD
+          <div class="password-wrap">
+            <input type="password" name="password" id="loginPassword" required placeholder="Enter password">
+            <button type="button" class="toggle-pwd" data-target="loginPassword" aria-label="Show or hide password">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </label>
+
+        <button type="submit" class="submit-btn" id="loginBtn">Continue to PikaWebs →</button>
+      </form>
+
+      <form id="registerForm" class="auth-form">
+        <div>
+          <h2>Join PikaWebs team</h2>
+          <p class="subtitle">Verify your email with a 6-digit OTP sent from Founder Admin.</p>
+        </div>
+
+        <label class="field">FULL NAME
+          <input type="text" name="fullName" id="regFullName" required placeholder="e.g., Aleem Basha">
+        </label>
+
+        <label class="field">WORK EMAIL
+          <input type="email" name="email" id="regEmail" required placeholder="employee@pikawebs.com">
+        </label>
+
+        <div class="row-2">
+          <label class="field">ROLE
+            <select name="role" id="regRole" required>
+              <option value="Account Manager">Account Manager</option>
+              <option value="SEO Specialist">SEO Specialist</option>
+              <option value="SMM Executive">SMM Executive</option>
+              <option value="Web Developer">Web Developer</option>
+            </select>
+          </label>
+
+          <label class="field">DEPARTMENT
+            <select name="department" id="regDept" required>
+              <option value="Web Services">Web Services</option>
+              <option value="SEO">SEO</option>
+              <option value="SMM">SMM</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">CREATE PASSWORD
+          <div class="password-wrap">
+            <input type="password" name="password" id="regPassword" minlength="6" required placeholder="Minimum 6 characters">
+            <button type="button" class="toggle-pwd" data-target="regPassword" aria-label="Show or hide password">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </label>
+
+        <label class="field">CONFIRM PASSWORD
+          <div class="password-wrap">
+            <input type="password" name="confirmPassword" id="regConfirmPassword" minlength="6" required placeholder="Re-enter password">
+            <button type="button" class="toggle-pwd" data-target="regConfirmPassword" aria-label="Show or hide password">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </label>
+
+        <!-- OTP Verification Step (Appears after clicking Send OTP) -->
+        <div id="otpStepBox" style="display:none;padding:14px;background:#f5f5f7;border-radius:12px;border:1px solid #d2d2d7;">
+          <label class="field">ENTER 6-DIGIT EMAIL OTP
+            <input type="text" id="regOtpInput" maxlength="6" pattern="\d{6}" placeholder="e.g., 482910" style="text-align:center;font-size:18px;font-weight:700;letter-spacing:0.25em;">
+          </label>
+          <p style="font-size:11.5px;color:#515154;margin-top:6px;">
+            OTP sent to your email. <button type="button" id="resendOtpBtn" style="background:none;border:none;color:#0071e3;font-weight:600;cursor:pointer;">Resend OTP</button>
+          </p>
+        </div>
+
+        <button type="submit" class="submit-btn" id="registerBtn">Send Verification OTP →</button>
+      </form>
+
+      <div id="statusBox" class="status-msg"></div>
+      <p class="helper-note">PikaWebs · Web Designing & Marketing</p>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script>
+    const GOOGLE_SCRIPT_URL = window.CLIENT_HUB_CONFIG?.GOOGLE_SCRIPT_URL || "";
+    const statusBox = document.getElementById("statusBox");
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".auth-form").forEach(f => f.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+        statusBox.className = "status-msg";
+      });
+    });
+
+    const EYE_OPEN = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    const EYE_OFF = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+
+    document.querySelectorAll(".toggle-pwd").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const input = document.getElementById(btn.dataset.target);
+        const isHidden = input.type === "password";
+        input.type = isHidden ? "text" : "password";
+        btn.innerHTML = isHidden ? EYE_OFF : EYE_OPEN;
+      });
+    });
+
+    function showStatus(msg, type) {
+      statusBox.textContent = msg;
+      statusBox.className = `status-msg ${type}`;
+    }
+
+    function getDeviceInfo() {
+      const ua = navigator.userAgent;
+      const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
+      const deviceType = /iPad|Tablet/i.test(ua) ? "Tablet" : isMobile ? "Mobile" : "Desktop / Laptop";
+
+      let os = "Unknown OS";
+      if (/Windows NT 10/i.test(ua)) os = "Windows 10/11";
+      else if (/Windows/i.test(ua)) os = "Windows";
+      else if (/Android/i.test(ua)) os = "Android";
+      else if (/iPhone|iPad|iPod/i.test(ua)) os = "iOS";
+      else if (/Mac OS X/i.test(ua)) os = "macOS";
+      else if (/Linux/i.test(ua)) os = "Linux";
+
+      let browser = "Browser";
+      if (/Edg\//i.test(ua)) browser = "Microsoft Edge";
+      else if (/Chrome\//i.test(ua) && !/Edg\//i.test(ua)) browser = "Google Chrome";
+      else if (/Safari\//i.test(ua) && !/Chrome\//i.test(ua)) browser = "Apple Safari";
+      else if (/Firefox\//i.test(ua)) browser = "Mozilla Firefox";
+
+      return {
+        deviceType,
+        os,
+        browser,
+        screen: `${window.screen.width}×${window.screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata"
+      };
+    }
+
+    async function sendToGoogleSheet(payload) {
+      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("PASTE_YOUR")) {
+        // Fallback trial login for preloaded account if endpoint not set
+        if (payload.action === "login" && payload.email.toLowerCase() === "shaikmohamadmushakil@gmail.com" && payload.password === "Admin@123") {
+          return { success: true, user: { employeeId: "EMP-001", fullName: "Mushakil Shaik", email: payload.email, role: "Founder / Admin", department: "Management" } };
+        }
+        return { success: false, message: "Paste your Google Apps Script URL inside config.js first." };
+      }
+      const res = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+      const rawText = await res.text();
+      try {
+        return JSON.parse(rawText);
+      } catch (err) {
+        if (rawText.includes("Script function not found")) {
+          throw new Error("Apps Script deployment is outdated: 'doPost' not found. In Apps Script, click Deploy > Manage deployments > Edit > Version: New version > Deploy.");
+        }
+        if (rawText.includes("accounts.google.com") || rawText.includes("Sign in")) {
+          throw new Error("Permission error: In Apps Script deployment settings, set 'Who has access' to 'Anyone'.");
+        }
+        throw new Error("Apps Script returned HTML error: " + rawText.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 100));
+      }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const btn = document.getElementById("loginBtn");
+      btn.disabled = true;
+      btn.textContent = "Signing in...";
+      const fd = new FormData(e.target);
+
+      try {
+        const result = await sendToGoogleSheet({
+          action: "login",
+          email: fd.get("email"),
+          password: fd.get("password"),
+          device: getDeviceInfo()
+        });
+        if (result.success) {
+          const dev = getDeviceInfo();
+          const sessionUser = {
+            ...result.user,
+            loginTime: new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", hour12: true }) + ", " + new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+            device: dev
+          };
+          localStorage.setItem("client-hub-session", JSON.stringify(sessionUser));
+          showStatus("Authenticated. Opening PikaWebs workspace...", "success");
+          setTimeout(() => window.location.href = "index.html", 600);
+        } else {
+          showStatus(result.message || "Sign in failed.", "error");
+        }
+      } catch (err) {
+        showStatus("Connection error: " + err.message, "error");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Continue to PikaWebs →";
+      }
+    });
+
+    let otpSentStage = false;
+
+    async function requestRegistrationOtp() {
+      const fullName = document.getElementById("regFullName").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const role = document.getElementById("regRole").value;
+      const department = document.getElementById("regDept").value;
+      const password = document.getElementById("regPassword").value;
+      const confirmPassword = document.getElementById("regConfirmPassword").value;
+
+      if (!fullName || !email || !password) {
+        showStatus("Please fill in all required fields.", "error");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showStatus("Passwords do not match.", "error");
+        return;
+      }
+
+      const btn = document.getElementById("registerBtn");
+      btn.disabled = true;
+      btn.textContent = "Sending OTP to your email...";
+
+      try {
+        const result = await sendToGoogleSheet({
+          action: "sendOtp",
+          fullName,
+          email,
+          role,
+          department,
+          password
+        });
+        if (result.success) {
+          otpSentStage = true;
+          document.getElementById("otpStepBox").style.display = "block";
+          document.getElementById("regOtpInput").required = true;
+          document.getElementById("regEmail").readOnly = true;
+          btn.textContent = "Verify OTP & Complete Registration ✓";
+          showStatus(result.message, "success");
+        } else {
+          showStatus(result.message || "Could not send OTP.", "error");
+          btn.textContent = "Send Verification OTP →";
+        }
+      } catch (err) {
+        showStatus("Connection error: " + err.message, "error");
+        btn.textContent = "Send Verification OTP →";
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    document.getElementById("resendOtpBtn").addEventListener("click", requestRegistrationOtp);
+
+    document.getElementById("registerForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      if (!otpSentStage) {
+        await requestRegistrationOtp();
+        return;
+      }
+
+      const email = document.getElementById("regEmail").value.trim();
+      const otp = document.getElementById("regOtpInput").value.trim();
+      const btn = document.getElementById("registerBtn");
+      btn.disabled = true;
+      btn.textContent = "Verifying OTP...";
+
+      try {
+        const result = await sendToGoogleSheet({
+          action: "verifyOtpAndRegister",
+          email,
+          otp
+        });
+        if (result.success) {
+          if (result.pendingApproval) {
+            showStatus(result.message, "success");
+            e.target.reset();
+            otpSentStage = false;
+            document.getElementById("otpStepBox").style.display = "none";
+            document.getElementById("regEmail").readOnly = false;
+            btn.textContent = "Send Verification OTP →";
+          } else {
+            const dev = getDeviceInfo();
+            const sessionUser = {
+              ...result.user,
+              loginTime: new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", hour12: true }) + ", " + new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+              device: dev
+            };
+            localStorage.setItem("client-hub-session", JSON.stringify(sessionUser));
+            showStatus("Verified! Entering PikaWebs...", "success");
+            setTimeout(() => window.location.href = "index.html", 700);
+          }
+        } else {
+          showStatus(result.message || "Invalid OTP.", "error");
+          btn.textContent = "Verify OTP & Complete Registration ✓";
+        }
+      } catch (err) {
+        showStatus("Connection error: " + err.message, "error");
+        btn.textContent = "Verify OTP & Complete Registration ✓";
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

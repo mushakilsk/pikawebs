@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>PikaWebs · Agency Workspace</title>
+
+  <!-- Immediate Employee Session Guard -->
+  <script>
+    if (!localStorage.getItem("client-hub-session")) {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <!-- PikaWebs Favicon & App Icon -->
+  <link rel="icon" type="image/png" href="Pikawebs Gradient Tech Logo.png">
+  <link rel="apple-touch-icon" href="Pikawebs Gradient Tech Logo.png">
+
+  <!-- Elegant Apple-inspired Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Google Gemini / Workspace Style Opening Animation -->
+  <div id="splashIntro" class="splash-intro" aria-hidden="true">
+    <div class="splash-ambient-glow"></div>
+    <div class="splash-center">
+      <div class="splash-logo-wrap">
+        <img src="Pikawebs Gradient Tech Logo.png" alt="PikaWebs" class="splash-logo" onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<strong style=\'font-size:24px;font-weight:800;color:#0071e3;\'>PikaWebs</strong>');">
+      </div>
+      <div class="workspace-loader">
+        <div class="workspace-loader-bar"></div>
+      </div>
+      <p class="splash-caption">Connecting to PikaWebs Workspace…</p>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="Pikawebs Gradient Tech Logo.png" alt="PikaWebs" class="sidebar-logo" onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<span class=\'brand-mark\'>P</span><strong>PikaWebs</strong>');">
+        <button class="sidebar-close-btn" data-close aria-label="Close navigation">✕</button>
+      </div>
+
+      <div class="workspace"><i></i>PikaWebs HQ <span>⌄</span></div>
+
+      <nav>
+        <button class="nav active" data-view="overview">
+          <b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></b>
+          Overview
+        </button>
+        <button class="nav" data-view="clients">
+          <b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></b>
+          Clients <em id="navClients">1</em>
+        </button>
+        <button class="nav" data-view="services">
+          <b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></b>
+          Services
+        </button>
+        <button class="nav" data-view="projects">
+          <b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></b>
+          Projects <em id="navProjects">0</em>
+        </button>
+        <button class="nav" data-view="chat">
+          <b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></b>
+          Team Chat
+        </button>
+        <button class="nav" data-view="invoices">
+          <b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></b>
+          Invoices
+        </button>
+        <button class="nav" data-view="reports">
+          <b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></b>
+          Reports
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="nav" data-view="settings">
+          <b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></b>
+          Settings
+        </button>
+        <button class="nav" id="logoutBtn" type="button">
+          <b>⎋</b>Sign out
+        </button>
+        <div class="profile" id="sidebarProfile" role="button" tabindex="0" title="Click to view your individual profile">
+          <span class="avatar" id="sidebarAvatar">PW</span>
+          <span style="overflow:hidden;">
+            <strong id="sidebarUserName">Account manager</strong>
+            <small id="sidebarUserRole">PikaWebs team</small>
+          </span>
+          <span class="profile-arrow">›</span>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <header>
+        <button id="menu" class="menu" aria-label="Open navigation">☰</button>
+        <div class="global-search">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input id="globalSearch" placeholder="Search PikaWebs clients, services, or invoices…" aria-label="Search">
+          <kbd>⌘ K</kbd>
+        </div>
+        <div class="top-actions">
+          <button class="round" id="syncBtn" title="Sync with Google Sheets">⟳</button>
+          <button class="round" title="Help">?</button>
+          <span class="avatar" id="headerAvatar" role="button" tabindex="0">PW</span>
+        </div>
+      </header>
+
+      <section class="page active" id="overview">
+        <div class="heading">
+          <div>
+            <p class="eyebrow" id="today"></p>
+            <h1>PikaWebs Portfolio</h1>
+            <p class="sub">A live view of client health, services, and billing.</p>
+          </div>
+          <div class="actions">
+            <button class="button secondary" data-action="import">⇧ Import CSV</button>
+            <button class="button primary" data-action="add-client">＋ Add client</button>
+          </div>
+        </div>
+        <div id="metrics" class="metrics"></div>
+        <div class="dashboard">
+          <article class="panel value-panel">
+            <div class="panel-head">
+              <div><p class="eyebrow">PORTFOLIO VALUE</p><h2 id="portfolioValue">₹0</h2></div>
+              <button class="link" data-jump="clients">View clients →</button>
+            </div>
+            <div class="chart">
+              <div class="axis"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
+              <svg viewBox="0 0 650 170" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="shade" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#0071e3" stop-opacity=".18"/>
+                    <stop offset="1" stop-color="#0071e3" stop-opacity=".0"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="0,170 0,136 162,107 325,72 488,49 650,19 650,170" fill="url(#shade)"/>
+                <polyline points="0,136 162,107 325,72 488,49 650,19" fill="none" stroke="#0071e3" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="chart-labels"><span>Clients</span><span>Services</span><span>Invoices</span><span>Payments</span><span>Review</span></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <div><p class="eyebrow">RECENT ACTIVITY</p><h2>Workspace updates</h2></div>
+              <button class="link" data-jump="invoices">Invoices →</button>
+            </div>
+            <ul id="activity" class="activity"></ul>
+          </article>
+        </div>
+        <div class="dashboard lower">
+          <article class="panel">
+            <div class="panel-head">
+              <div><p class="eyebrow">CLIENT STATUS</p><h2>Account health</h2></div>
+              <button class="link" data-jump="clients">Manage clients →</button>
+            </div>
+            <div id="statusBars" class="breakdown"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <div><p class="eyebrow">SERVICE MIX</p><h2>Active services</h2></div>
+              <button class="link" data-jump="services">Catalog →</button>
+            </div>
+            <div id="serviceBars" class="breakdown"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="clients">
+        <div class="heading">
+          <div><p class="eyebrow">CLIENT RELATIONSHIPS</p><h1>Clients</h1><p class="sub">The source-of-truth PikaWebs client register synced with Google Sheets.</p></div>
+          <div class="actions"><button class="button secondary" data-action="export">⇩ Export CSV</button><button class="button primary" data-action="add-client">＋ Add client</button></div>
+        </div>
+        <article class="panel table-panel">
+          <div class="toolbar">
+            <label class="search"><span>⌕</span><input id="clientSearch" placeholder="Search clients"></label>
+            <select id="statusFilter"><option value="all">All statuses</option></select>
+            <button class="button secondary small" id="clearFilters">↻ Reset</button>
+          </div>
+          <div class="scroll">
+            <table>
+              <thead><tr><th>CLIENT</th><th>COMPANY</th><th>CONTACT PERSON</th><th>SERVICE & CATEGORY</th><th>STATUS</th><th>STANDARD RATE</th><th></th></tr></thead>
+              <tbody id="clientRows"></tbody>
+            </table>
+          </div>
+          <footer id="clientCount"></footer>
+        </article>
+      </section>
+
+      <section class="page" id="services">
+        <div class="heading">
+          <div><p class="eyebrow">SERVICE CATALOG</p><h1>Services</h1><p class="sub">Define deliverables and standard pricing once, then use them everywhere.</p></div>
+          <div class="actions"><button class="button primary" data-action="add-service">＋ Add service</button></div>
+        </div>
+        <div id="serviceStats" class="service-stats"></div>
+        <div id="serviceGrid" class="service-grid"></div>
+      </section>
+
+      <!-- Client Projects Workspace (Visible to all employees & founder) -->
+      <section class="page" id="projects">
+        <div class="heading">
+          <div>
+            <p class="eyebrow">OPERATIONS & DELIVERABLES</p>
+            <h1>Client Projects</h1>
+            <p class="sub">Track live client deliverables, update milestone progress, and log work notes.</p>
+          </div>
+          <div class="actions">
+            <button class="button secondary" id="refreshProjectsBtn">↻ Refresh</button>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <article class="metric"><p>TOTAL PROJECTS</p><strong id="metricTotalProjects">0</strong><small>Across Web, SEO & SMM</small></article>
+          <article class="metric"><p>IN PROGRESS</p><strong id="metricInProgressProjects">0</strong><small>Active development</small></article>
+          <article class="metric"><p>UNDER REVIEW</p><strong id="metricReviewProjects">0</strong><small>Pending client check</small></article>
+          <article class="metric"><p>COMPLETED</p><strong id="metricCompletedProjects">0</strong><small>Delivered successfully</small></article>
+        </div>
+
+        <div class="panel">
+          <div style="padding:16px 20px;border-bottom:1px solid rgba(0,0,0,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+              <button type="button" class="cat-pill active" data-proj-filter="All">All Projects</button>
+              <button type="button" class="cat-pill" data-proj-filter="In Progress">In Progress</button>
+              <button type="button" class="cat-pill" data-proj-filter="Under Review">Under Review</button>
+              <button type="button" class="cat-pill" data-proj-filter="Completed">Completed</button>
+            </div>
+            <p style="font-size:12.5px;color:#86868b;" id="projectsCountLabel">Showing 0 projects</p>
+          </div>
+          <div id="projectsGrid" class="projects-grid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:16px;padding:20px;"></div>
+        </div>
+      </section>
+
+      <!-- Internal Team Chat (Visible to all registered employees & founder) -->
+      <section class="page" id="chat">
+        <div class="heading">
+          <div>
+            <p class="eyebrow">TEAM COLLABORATION</p>
+            <h1>Team Chat</h1>
+            <p class="sub">Internal communication room for registered employees and Founder.</p>
+          </div>
+          <div class="actions">
+            <button class="button secondary" id="refreshChatBtn">↻ Refresh chat</button>
+          </div>
+        </div>
+
+        <div class="panel chat-shell">
+          <div class="chat-header">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="online-dot"></span>
+              <div>
+                <strong># team-general</strong>
+                <p style="font-size:11.5px;color:#86868b;margin:0;">PikaWebs Internal Coordination Channel</p>
+              </div>
+            </div>
+            <span class="pill open" id="chatCurrentBadge">Online</span>
+          </div>
+
+          <div class="chat-messages" id="chatMessagesList"></div>
+
+          <form id="chatForm" class="chat-composer">
+            <input type="text" id="chatInput" placeholder="Write a message or project update to the team…" autocomplete="off" required>
+            <button type="submit" class="button primary" id="chatSendBtn">Send ➤</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="page" id="invoices">
+        <div class="heading">
+          <div><p class="eyebrow">BILLING</p><h1>Invoice generator</h1><p class="sub">Select a client and the matching contact, service, rate, and total are prepared for you.</p></div>
+          <div class="actions"><button class="button secondary" id="printInvoice">⎙ Print invoice</button><button class="button primary" id="saveInvoice">Save invoice</button></div>
+        </div>
+        <div class="invoice-layout">
+          <article class="panel invoice-form">
+            <div class="panel-head"><div><p class="eyebrow">NEW INVOICE</p><h2 id="draftNumber"></h2></div><span class="pill draft">Draft</span></div>
+            <div class="form-grid">
+              <label class="field wide">Bill to (client)<select id="invoiceClient"></select></label>
+              <label class="field">Invoice date<input id="invoiceDate" type="date"></label>
+              <label class="field">Payment due<input id="invoiceDue" type="date"></label>
+              <label class="field">Invoice number<input id="invoiceNo"></label>
+              <label class="field">PO / reference<input id="invoiceRef" placeholder="Optional"></label>
+            </div>
+            <div class="contact-box" id="invoiceContact"></div>
+            <div class="items">
+              <div class="item-head"><span>SERVICE & DELIVERABLES</span><span>MODEL</span><span>RATE</span><span>QTY</span><span>TOTAL</span></div>
+              <div id="invoiceItems"></div>
+            </div>
+            <div class="invoice-controls">
+              <label class="field">Tax rate (%)<input id="taxRate" type="number" min="0" max="100" step="0.01"></label>
+              <label class="field">Amount paid<input id="amountPaid" type="number" min="0" step="1"></label>
+            </div>
+          </article>
+          <aside id="invoicePreview" class="panel preview"></aside>
+        </div>
+        <article class="panel invoice-history">
+          <div class="panel-head"><div><p class="eyebrow">SAVED INVOICES</p><h2>Billing history</h2></div></div>
+          <div class="scroll">
+            <table>
+              <thead><tr><th>INVOICE</th><th>CLIENT</th><th>ISSUED</th><th>DUE</th><th>TOTAL</th><th>BALANCE</th><th>STATUS</th></tr></thead>
+              <tbody id="invoiceRows"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="page" id="reports">
+        <div class="heading"><div><p class="eyebrow">ANALYTICS</p><h1>Reports</h1><p class="sub">Portfolio measures based on rates, statuses, and invoices.</p></div><div class="actions"><button class="button secondary" data-action="export">⇩ Export clients</button></div></div>
+        <div class="report-cards">
+          <article class="panel report"><p class="eyebrow">ACTIVE ACCOUNTS</p><strong id="activeReport">0</strong><small>Clients with Active status</small></article>
+          <article class="panel report"><p class="eyebrow">SERVICE VALUE</p><strong id="valueReport">₹0</strong><small>Standard rates across clients</small></article>
+          <article class="panel report"><p class="eyebrow">OUTSTANDING BALANCE</p><strong id="balanceReport">₹0</strong><small>Saved invoices still to collect</small></article>
+        </div>
+        <article class="panel report-chart"><div class="panel-head"><div><p class="eyebrow">VALUE BY CLIENT STATUS</p><h2>Portfolio composition</h2></div></div><div id="reportBars" class="report-bars"></div></article>
+      </section>
+
+      <section class="page" id="settings">
+        <div class="heading"><div><p class="eyebrow">WORKSPACE</p><h1>Settings & database sync</h1><p class="sub">Live connected to your PikaWebs Google Sheets multi-tab database.</p></div></div>
+        <div class="settings">
+          <article class="panel setting">
+            <h2>Import client register</h2>
+            <p>Upload a CSV file to bulk-sync client records straight into your PikaWebs Google Sheet.</p>
+            <button class="button primary" data-action="import">⇧ Select CSV file</button>
+            <input id="fileInput" type="file" accept=".csv,text/csv" hidden>
+            <small id="importStatus">Ready for CSV upload.</small>
+          </article>
+          <article class="panel setting">
+            <h2>Live Google Sheets sync</h2>
+            <p>All changes made by your team sync directly across the Employees, Clients, Services, and Invoices tabs.</p>
+            <button class="button secondary" id="syncGasBtn">⟳ Sync full database</button>
+            <div class="chips"><code>Employees</code><code>Clients</code><code>Services</code><code>Invoices</code><code>₹ INR</code></div>
+          </article>
+          <article class="panel setting wide-setting">
+            <h2>Database mapping</h2>
+            <div class="mapping">
+              <div><strong>Clients tab</strong><span>Client Name, Company, Domain, Contact Person, Email, Phone, Account Manager, Category, Service Name, Status, Pricing Model, Standard Rate</span></div>
+              <div><strong>Services tab</strong><span>Category, Service Name, Pricing Model, Standard Rate, Billing Frequency, Deliverables Description</span></div>
+              <div><strong>Invoices tab</strong><span>Company selection, dynamic service lines, Net 30 due date, tax default, amount paid, and balance due</span></div>
+            </div>
+            <button class="link" id="restore">Sync latest data from Google Sheets →</button>
+          </article>
+        </div>
+        <!-- Founder / Admin Only: Live Employee Login & Device Monitor -->
+        <div id="adminSecuritySection" style="margin-top:24px;"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="overlay" class="overlay"></div>
+  <aside id="drawer" class="drawer"><button class="close" data-close>×</button><div id="drawerContent"></div></aside>
+  <div id="modal" class="modal"><div class="modal-card"><button class="close" data-close>×</button><p id="modalKicker" class="eyebrow"></p><h2 id="modalTitle"></h2><form id="recordForm"></form></div></div>
+  <div id="projectModal" class="modal"><div class="modal-card"><button class="close" data-close>×</button><p class="eyebrow" style="color:#0071e3;">PROJECT WORKSPACE</p><h2 id="projectModalTitle">Update Project Status</h2><form id="projectUpdateForm"></form></div></div>
+  <div id="profileModal" class="modal"><div class="modal-card profile-card-modal"><button class="close" data-close aria-label="Close profile">×</button><div id="profileModalContent"></div></div></div>
+  <div id="toast" class="toast" role="status"></div>
+
+  <!-- Mobile Bottom Navigation Bar (Visible on Phones) -->
+  <nav class="mobile-tabbar" id="mobileTabbar" aria-label="Mobile navigation">
+    <button class="m-tab active" data-view="overview">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span>Overview</span>
+    </button>
+    <button class="m-tab" data-view="clients">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+      <span>Clients</span>
+    </button>
+    <button class="m-tab" data-view="services">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
+      <span>Services</span>
+    </button>
+    <button class="m-tab" data-view="invoices">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>Invoices</span>
+    </button>
+    <button class="m-tab" data-view="settings">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>Admin</span>
+    </button>
+  </nav>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
